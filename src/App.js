@@ -21,10 +21,12 @@ const StatusSVG = ( { strokeDasharray }) =>
     
 class App extends Component {
     static defaultProps = {
+        // refer to my Medium article for instructions
+        // on how to get all these bits.
         keys : {
-            viewID : '134592213',
-            googleMapAPI: 'AIzaSyD-w-8QMXKQKvkXABkeXwcTUtkxwH06Uow',
-            clientID : '370041094144-tm81igjbrd39bdk27t1h7obgvk8ihjlk.apps.googleusercontent.com',
+            viewID : '12345678',
+            googleMapAPI: 'YOUR API KEY',
+            clientID : 'YOUR CLIENT ID',
             scope: 'https://www.googleapis.com/auth/analytics',
             property: 'emptycan.com'
         },
