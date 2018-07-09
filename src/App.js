@@ -20,7 +20,7 @@ const StatusSVG = ( { strokeDasharray }) =>
     </div>
 
 // settings form
-const   Settings = ( { ...props, handleSettingsUpdate, handleSettingsValue } ) => 
+const  Settings = ( { ...props, handleSettingsUpdate, handleSettingsValue } ) => 
     <form className="settings">
         {["viewID","googleMapAPI","clientID","property"].map(item => 
             <Fragment>
@@ -36,7 +36,7 @@ const   Settings = ( { ...props, handleSettingsUpdate, handleSettingsValue } ) =
             className="ui--button"
             onClick={(e) => handleSettingsUpdate(e)}
             >
-            Proceed to Login
+            Proceed
         </button>
     </form>
 class App extends Component {
@@ -326,7 +326,7 @@ class App extends Component {
                             <section>
                                 <h1>Get a real-time dashboard from Google Analytics</h1>
                                 <p>Configure with your own values and watch your website or app usage in real-time.<br />
-                                <i>Need Help? <a href="https://hackernoon.com/using-the-google-real-time-reporting-api-71ce3f6ceee4" target="_blank">Read this post</a></i></p>
+                                <i>Need Help? <a href="https://hackernoon.com/using-the-google-real-time-reporting-api-71ce3f6ceee4" target="_blank">Read this post</a> or <a href="https://twitter.com/jessekorzan" target="_blank">@jessekorzan</a></i></p>
                                 <Settings 
                                     handleSettingsUpdate={this.handleSettingsUpdate} 
                                     handleSettingsValue={this.handleSettingsValue} 
