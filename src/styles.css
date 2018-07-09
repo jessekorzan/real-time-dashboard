@@ -19,6 +19,22 @@ a {
   color: #31aae3;
   text-decoration: none; }
 
+.ui--button, button {
+  border: none;
+  background: #44bc8f;
+  color: #FFFFFF;
+  display: block;
+  width: auto;
+  padding: 14px 22px;
+  text-transform: uppercase;
+  font-family: "Heebo";
+  font-size: 14px;
+  outline: none !important;
+  transition: all 260ms ease-in-out;
+  cursor: pointer; }
+  .ui--button:hover, button:hover {
+    background: #2f8464; }
+
 nav {
   position: absolute;
   background: #35323e;
@@ -49,33 +65,39 @@ main {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 58vh;
+  height: 100vh;
   max-height: 100%;
   display: flex;
   justify-content: flex-start;
-  align-items: flex-end;
-  overflow-y: scroll;
-  pointer-events: none; }
+  padding-top: 48px;
+  overflow-y: scroll; }
+  main.live {
+    height: 58vh;
+    align-items: flex-end;
+    padding-top: 0; }
+    main.live:not([class*="error"]) {
+      pointer-events: none; }
+      main.live:not([class*="error"]) section:last-child:before {
+        content: "Recent Locations";
+        position: absolute;
+        bottom: 0;
+        left: 48px;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: #44bc8f;
+        width: 66%;
+        padding-top: 8px;
+        letter-spacing: 0.4em; }
 
 section {
   position: relative;
+  z-index: 9999;
   width: 100%;
   max-width: 1024px;
   padding: 24px 48px; }
   section *:last-child {
     margin-bottom: 0; }
-  section:before {
-    content: "Recent Locations";
-    position: absolute;
-    bottom: 0;
-    left: 48px;
-    font-size: 12px;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: #44bc8f;
-    width: 66%;
-    padding-top: 8px;
-    letter-spacing: 0.4em; }
 
 .status {
   position: fixed;
@@ -198,6 +220,27 @@ section {
       animation-fill-mode: forwards;
       animation-duration: 1s;
       animation-timing-function: ease-in-out; }
+
+form {
+  padding: 24px;
+  background: #3f3b49; }
+  form input {
+    border: 1px solid #575265;
+    background: #35323e;
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 24px;
+    width: 100%;
+    font-family: monospace;
+    font-weight: 100;
+    color: #fff69d; }
+  form label {
+    font-size: 16px;
+    font-weight: 400;
+    color: #eceeeb;
+    padding: 8px 0;
+    letter-spacing: 0.1em;
+    display: block; }
 
 @keyframes pulse {
   0% {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {GoogleAPI, GoogleLogin, GoogleLogout, CustomGoogleLogin, CustomGoogleLogout, googleGetBasicProfil, googleGetAuthResponse} from 'react-google-oauth'
 import GoogleMapReact from 'google-map-react';
 import MAPSTYLES from './map.js';
@@ -18,17 +18,37 @@ const StatusSVG = ( { strokeDasharray }) =>
             </svg>
         </div>
     </div>
-    
+
+// settings form
+const   Settings = ( { ...props, handleSettingsUpdate, handleSettingsValue } ) => 
+    <form className="settings">
+        {["viewID","googleMapAPI","clientID","property"].map(item => 
+            <Fragment>
+                <label>{ item }</label>
+                <input 
+                    type="text" 
+                    value={ props[item] } 
+                    onChange={(e) => handleSettingsValue(e, item)}
+                />
+            </Fragment>
+        )}
+        <button 
+            className="ui--button"
+            onClick={(e) => handleSettingsUpdate(e)}
+            >
+            Proceed to Login
+        </button>
+    </form>
 class App extends Component {
     static defaultProps = {
         // refer to my Medium article for instructions
         // on how to get all these bits.
         keys : {
-            viewID : '12345678',
-            googleMapAPI: 'YOUR API KEY',
-            clientID : 'YOUR CLIENT ID',
+            viewID : 'look in Google Analytics',
+            googleMapAPI: 'api key https://console.cloud.google.com/apis',
+            clientID : 'OAuth 2.0 client ID https://console.cloud.google.com/apis',
             scope: 'https://www.googleapis.com/auth/analytics',
-            property: 'emptycan.com'
+            property: 'your-domain.com'
         },
         polling : {
             interval : 10 //seconds
@@ -37,7 +57,9 @@ class App extends Component {
     constructor(defaultProps) { 
         super(defaultProps);
         this.state = {
-            url : 'https://www.googleapis.com/analytics/v3/data/realtime?ids=ga:' + this.props.keys.viewID + '&metrics=rt:activeUsers&dimensions=rt:country,rt:city,rt:latitude,rt:longitude',
+            ...this.props.keys,
+            apiURL : 'https://www.googleapis.com/analytics/v3/data/realtime?ids=ga:',
+            apiOptions : '&metrics=rt:activeUsers&dimensions=rt:country,rt:city,rt:latitude,rt:longitude',
             userName : false,
             error : "Login Required",
             pause : false, // if true... app stops polling API
@@ -49,14 +71,43 @@ class App extends Component {
                 lat: 49.281057,
                 lng: -123.107638
             },
-            zoom : 2
+            zoom : 2,
+            settings : false
         };
     }
+    componentDidMount() {
+        this.hydrateStateWithLocalStorage();
+    }
+    saveStateToLocalStorage = () =>  {
+        // for every item in React state
+        for (let key in this.state) {
+            // save to localStorage
+            localStorage.setItem(key, JSON.stringify(this.state[key]));
+        }
+    }
+    hydrateStateWithLocalStorage = () =>  {
+        // for all items in state
+        for (let key in this.state) {
+            // if the key exists in localStorage
+            if (localStorage.hasOwnProperty(key)) {
+                // get the key's value from localStorage
+                let value = localStorage.getItem(key);
     
+                // parse the localStorage string and setState
+                try {
+                    value = JSON.parse(value);
+                    this.setState({ [key]: value });
+                } catch (e) {
+                    // handle empty string
+                    this.setState({ [key]: value });
+                }
+            }
+        }
+    }
     fetchData = () => {
         let _authResp = googleGetAuthResponse();
         console.log("Obtenir les données!")
-        fetch(this.state.url + "&access_token=" + _authResp.accessToken)
+        fetch(this.state.apiURL + this.state.viewID + this.state.apiOptions + "&access_token=" + _authResp.accessToken)
             .then(response => response.json())
             .then(result => {
                 if (result.error)
@@ -79,17 +130,18 @@ class App extends Component {
             _stats =  this.state.stats,
             _error = this.state.error
         
-        _incoming = results.rows.map(stat => {
+        _incoming = results.rows.map((stat, index) => {
             let _city = (stat[1] != "zz") ? stat[1] + ", " : "",
                 _country = stat[0],
                 _str = `${_city}${_country}`;
             
             if (stat[2]) {
                 _plot.push([`${stat[2]}, ${stat[3]}, ${_city}`]);
-                _center = {
-                    lat: Number(stat[2]),
-                    lng: Number(stat[3])
-                };
+                if (index ===0) 
+                    _center = {
+                        lat: Number(stat[2]),
+                        lng: Number(stat[3])
+                    };
             }
             return _str;
         })
@@ -153,6 +205,18 @@ class App extends Component {
             error : "Waiting for visitors..."
         })
     }
+    handleSettingsValue = (e, label) => {
+        this.setState({
+            [label] : e.target.value
+        }) 
+    }
+    handleSettingsUpdate = (e) => {
+        e.preventDefault();
+        this.saveStateToLocalStorage();
+        this.setState({
+            settings : !this.state.settings
+        })
+    }
     updateDisplayTimer = (val) => {
         // messing with SVG for countdown timer
         let _val = Math.floor(val),
@@ -168,9 +232,9 @@ class App extends Component {
         let _user = this.state.userName;
         return  (    
             <nav>
-                <div>Real-Time &mdash; { this.props.keys.property }</div>
+                <div>Real-Time &mdash; { this.state.property }</div>
                 <GoogleAPI 
-                    clientId={this.props.keys.clientID}
+                    clientId={this.state.clientID}
                     scope={this.props.keys.scope}
                     prompt="consent"
                     onUpdateSigninStatus={this.handleLogin}
@@ -200,7 +264,7 @@ class App extends Component {
             return (
                 <div className="map--wrapper">
                     <GoogleMapReact
-                        bootstrapURLKeys={{ key: this.props.keys.googleMapAPI }}
+                        bootstrapURLKeys={{ key: this.state.googleMapAPI }}
                         options={{ styles: MAPSTYLES }}
                         defaultCenter={_center}
                         defaultZoom={this.state.zoom}
@@ -233,22 +297,46 @@ class App extends Component {
     render() {
         let Status = () => <StatusSVG strokeDasharray={ this.state.strokeDasharray }/>,
             Total = ({ value = this.state.total }) => <div className="total">{value}</div>,
-            ErrorMessage = ({ value = this.state.error }) => {
-                return value ? <h1>{value}</h1> : null;
-            }
+            _error = this.state.error;
+            
         return (
-            <div>
-                { this.renderNav() }
-                { this.renderMap() }
-                <Status />
-                <Total />
-                <main id="app">
-                    <section>
-                        <ErrorMessage />
-                        { this.renderStats() }
-                    </section>
-                </main>
-            </div>
+            <Fragment>
+                { this.state.settings &&
+                    <div>
+                        { this.renderNav() }
+                        { this.renderMap() }
+                        <Status />
+                        <Total />
+                        <main id="app" className={_error ? "error live" : "live"}>
+                            <section>
+                                {_error &&
+                                    <Fragment>
+                                        <h1>{_error}</h1> 
+                                        <button onClick={this.handleSettingsUpdate}>Check Settings</button>
+                                    </Fragment>
+                                }
+                                { this.renderStats() }
+                            </section>
+                        </main>
+                    </div>
+                }
+                { !this.state.settings &&
+                    <div>
+                        <main id="app">
+                            <section>
+                                <h1>Get a real-time dashboard from Google Analytics</h1>
+                                <p>Configure with your own values and watch your website or app usage in real-time.<br />
+                                <i>Need Help? <a href="https://hackernoon.com/using-the-google-real-time-reporting-api-71ce3f6ceee4" target="_blank">Read this post</a></i></p>
+                                <Settings 
+                                    handleSettingsUpdate={this.handleSettingsUpdate} 
+                                    handleSettingsValue={this.handleSettingsValue} 
+                                    { ...this.state } 
+                                />
+                            </section>
+                        </main>
+                    </div>
+                }
+            </Fragment>
         );
     }
 }

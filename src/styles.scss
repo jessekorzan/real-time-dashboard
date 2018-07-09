@@ -60,6 +60,26 @@ a {
     text-decoration: none;
 }
 
+// ui
+.ui--button, button {
+    border: none;
+    background: $green;
+    color: $white;
+    display: block;
+    width: auto;
+    padding: 14px 22px;
+    text-transform: uppercase;
+    font-family: $font;
+    font-size: 14px;
+    outline: none !important;
+    transition: all 260ms ease-in-out;
+    cursor: pointer;
+    &:hover {
+        background: darken($green, 15%);
+    }
+}
+
+
 // layout
 
 nav {
@@ -95,35 +115,44 @@ main {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 58vh;
+    height: 100vh;
     max-height: 100%;
     display: flex;
     justify-content: flex-start;
-    align-items: flex-end;
+    //align-items: center;
+    padding-top: $spacer;
     overflow-y: scroll;
-    pointer-events: none;
+    &.live {
+        height: 58vh;
+        align-items: flex-end;
+        padding-top: 0;
+        &:not([class*="error"]) {
+            pointer-events: none;
+            section:last-child:before {
+                content: "Recent Locations";
+                position: absolute;
+                bottom: 0;
+                left: $spacer;
+                font-size: 12px;
+                text-transform: uppercase;
+                font-weight: 600;
+                color: $green;
+                width: 66%;
+                padding-top: $spacer/6;
+                letter-spacing: 0.4em;
+            }
+        }
+    }
 }
 
 section {
     position: relative;
+    z-index: 9999;
     width: 100%;
     max-width: $screen-md;
     padding: $spacer/2 $spacer;
     *:last-child {
         margin-bottom: 0;
-    }
-    &:before {
-        content: "Recent Locations";
-        position: absolute;
-        bottom: 0;
-        left: $spacer;
-        font-size: 12px;
-        text-transform: uppercase;
-        font-weight: 600;
-        color: $green;
-        width: 66%;
-        padding-top: $spacer/6;
-        letter-spacing: 0.4em;
     }
 }
 .status {
@@ -275,6 +304,32 @@ section {
         }
     }
 }
+form {
+    padding: $spacer/2;
+    background: $black__dark;
+    input {
+        border: 1px solid $black;
+        background: $black__darkest;
+        padding: $spacer/4;
+        font-size: 16px;
+        margin-bottom: $spacer/2;
+        width: 100%;
+        font-family: monospace;
+        font-weight: 100;
+        color: $yellow;
+    }
+    label {
+        font-size: 16px;
+        //text-transform: uppercase;
+        //font-family: monospace;
+        font-weight: 400;
+        color: $tan;
+        padding: $spacer/6 0;
+        letter-spacing: 0.1em;
+        display: block;
+    }
+}
+
 
 
 @keyframes pulse {
