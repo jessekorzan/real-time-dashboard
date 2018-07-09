@@ -78,14 +78,14 @@ class App extends Component {
     componentDidMount() {
         this.hydrateStateWithLocalStorage();
     }
-    // super thanks to https://github.com/ryanjyost for the localStorage jazzhands
+    // super thanks to https://github.com/ryanjyost for the localStorage ja
     saveStateToLocalStorage = () =>  {
         for (let key in this.state) {
             localStorage.setItem(key, JSON.stringify(this.state[key]));
         }
     }
     hydrateStateWithLocalStorage = () =>  {
-        for (let key in this.state) {e
+        for (let key in this.state) {
             if (localStorage.hasOwnProperty(key)) {
                 let value = localStorage.getItem(key);
                 try {
@@ -154,6 +154,11 @@ class App extends Component {
             total : _total,
             error : _error 
         });
+/*
+
+        let objDiv = document.getElementById("app");
+        objDiv.scrollTop = objDiv.scrollHeight;
+*/
     }
     error = (message) => {
         this.setState({
