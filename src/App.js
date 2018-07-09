@@ -78,27 +78,20 @@ class App extends Component {
     componentDidMount() {
         this.hydrateStateWithLocalStorage();
     }
+    // super thanks to https://github.com/ryanjyost for the localStorage jazzhands
     saveStateToLocalStorage = () =>  {
-        // for every item in React state
         for (let key in this.state) {
-            // save to localStorage
             localStorage.setItem(key, JSON.stringify(this.state[key]));
         }
     }
     hydrateStateWithLocalStorage = () =>  {
-        // for all items in state
-        for (let key in this.state) {
-            // if the key exists in localStorage
+        for (let key in this.state) {e
             if (localStorage.hasOwnProperty(key)) {
-                // get the key's value from localStorage
                 let value = localStorage.getItem(key);
-    
-                // parse the localStorage string and setState
                 try {
                     value = JSON.parse(value);
                     this.setState({ [key]: value });
                 } catch (e) {
-                    // handle empty string
                     this.setState({ [key]: value });
                 }
             }
@@ -161,11 +154,6 @@ class App extends Component {
             total : _total,
             error : _error 
         });
-/*
-
-        let objDiv = document.getElementById("app");
-        objDiv.scrollTop = objDiv.scrollHeight;
-*/
     }
     error = (message) => {
         this.setState({
