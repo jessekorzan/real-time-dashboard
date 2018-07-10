@@ -23,7 +23,7 @@ const StatusSVG = ( { strokeDasharray }) =>
 const  Settings = ( { ...props, handleSettingsUpdate, handleSettingsValue } ) => 
     <form className="settings">
         {["viewID","googleMapAPI","clientID","property"].map(item => 
-            <Fragment>
+            <Fragment key={item}>
                 <label>{ item }</label>
                 <input 
                     type="text" 
@@ -32,13 +32,21 @@ const  Settings = ( { ...props, handleSettingsUpdate, handleSettingsValue } ) =>
                 />
             </Fragment>
         )}
-        <button 
-            className="ui--button"
-            onClick={(e) => handleSettingsUpdate(e)}
-            >
-            Proceed
-        </button>
+        <div className="grid">
+            <button 
+                className="ui--button"
+                onClick={(e) => handleSettingsUpdate(e)}
+                >
+                Proceed
+            </button>
+            <p><small><i>Need Help? <a href="https://hackernoon.com/using-the-google-real-time-reporting-api-71ce3f6ceee4" target="_blank">Read this post</a> or ask <a href="https://twitter.com/jessekorzan" target="_blank">@jessekorzan</a></i></small></p>
+        </div>
     </form>
+
+// GOOGLE REAL TIME REPORTING API 
+// https://developers.google.com/analytics/devguides/reporting/realtime/v3/reference/
+// https://hackernoon.com/using-the-google-real-time-reporting-api-71ce3f6ceee4
+
 class App extends Component {
     static defaultProps = {
         // refer to my Medium article for instructions
@@ -59,7 +67,7 @@ class App extends Component {
         this.state = {
             ...this.props.keys,
             apiURL : 'https://www.googleapis.com/analytics/v3/data/realtime?ids=ga:',
-            apiOptions : '&metrics=rt:activeUsers&dimensions=rt:country,rt:city,rt:latitude,rt:longitude,rt:pagepath',
+            apiOptions : '&metrics=rt:activeUsers&dimensions=rt:country,rt:city,rt:latitude,rt:longitude,rt:pagePath',
             userName : false,
             error : "Login Required",
             pause : false, // if true... app stops polling API
@@ -321,9 +329,8 @@ class App extends Component {
                     <div>
                         <main id="app" className="settings">
                             <section>
-                                <h1>Get a real-time dashboard from Google Analytics</h1>
-                                <p>Configure with your own values and watch your website or app usage in real-time.<br />
-                                <i>Need Help? <a href="https://hackernoon.com/using-the-google-real-time-reporting-api-71ce3f6ceee4" target="_blank">Read this post</a> or ask <a href="https://twitter.com/jessekorzan" target="_blank">@jessekorzan</a></i></p>
+                                <h1 style={{"margin" : "0 0 12px"}}>Real-time Dashboard &mdash; Visualize Your Users</h1>
+                                <h2>Quick  <a href="https://hackernoon.com/using-the-google-real-time-reporting-api-71ce3f6ceee4" target="_blank">configuration</a> with Google Analytics and Google Developer Console</h2>
                                 <Settings 
                                     handleSettingsUpdate={this.handleSettingsUpdate} 
                                     handleSettingsValue={this.handleSettingsValue} 
