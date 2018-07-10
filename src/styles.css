@@ -135,7 +135,7 @@ main {
     color: #dfe2dd; }
     @media screen and (min-width: 900px) {
       main.settings {
-        background: url("/bg.jpg") no-repeat 50% 50%;
+        background: url("/bg.cu.png") no-repeat 0% 50%;
         background-size: cover; } }
     main.settings section {
       display: block;
@@ -270,19 +270,23 @@ main {
       animation-timing-function: ease-in-out; }
 
 form {
-  padding: 24px;
-  background: rgba(63, 59, 73, 0.85);
-  margin-bottom: 24px; }
+  display: block;
+  margin: 8vh 0; }
   form input {
     border: 1px solid #575265;
     background: #35323e;
+    background: transparent;
     padding: 12px;
     font-size: 16px;
     margin-bottom: 24px;
     width: 100%;
     font-family: monospace;
     font-weight: 100;
-    color: #fff69d; }
+    color: rgba(255, 246, 157, 0.5);
+    outline: none;
+    transition: all 260ms ease-in-out; }
+    form input:focus {
+      color: #fff69d; }
   form label {
     font-size: 16px;
     font-weight: 400;
@@ -295,7 +299,8 @@ form {
     grid-template-columns: 222px auto;
     grid-gap: 12px;
     justify-content: space-between;
-    align-items: center; }
+    align-items: center;
+    margin-bottom: 48px; }
     @media screen and (max-width: 900px) {
       form .grid {
         display: block; }

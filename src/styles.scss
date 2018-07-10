@@ -192,7 +192,7 @@ main {
     }
     &.settings {
         @media screen and (min-width: 900px) {
-            background: url("/bg.jpg") no-repeat 50% 50%;
+            background: url("/bg.cu.png") no-repeat 0% 50%;
             background-size: cover;
         }
         color: $tan-darker;
@@ -362,19 +362,24 @@ main {
     }
 }
 form {
-    padding: $spacer/2;
-    background: rgba($black__dark, 0.85);
-    margin-bottom: $spacer/2;
+    display: block;
+    margin: 8vh 0;
     input {
         border: 1px solid $black;
         background: $black__darkest;
+        background: transparent;
         padding: $spacer/4;
         font-size: 16px;
         margin-bottom: $spacer/2;
         width: 100%;
         font-family: monospace;
         font-weight: 100;
-        color: $yellow;
+        color: rgba($yellow, 0.5);
+        outline: none;
+        transition: all 260ms ease-in-out;
+        &:focus {
+            color: $yellow;
+        }
     }
     label {
         font-size: 16px;
@@ -392,6 +397,7 @@ form {
         grid-gap: 12px;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: $spacer;
         @media screen and (max-width: 900px) {
             display: block;
             button {
