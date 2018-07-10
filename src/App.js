@@ -59,7 +59,7 @@ class App extends Component {
         this.state = {
             ...this.props.keys,
             apiURL : 'https://www.googleapis.com/analytics/v3/data/realtime?ids=ga:',
-            apiOptions : '&metrics=rt:activeUsers&dimensions=rt:country,rt:city,rt:latitude,rt:longitude',
+            apiOptions : '&metrics=rt:activeUsers&dimensions=rt:country,rt:city,rt:latitude,rt:longitude,rt:pagepath',
             userName : false,
             error : "Login Required",
             pause : false, // if true... app stops polling API
@@ -128,7 +128,7 @@ class App extends Component {
                 _country = stat[0],
                 _str = `${_city}${_country}`;
             
-            
+            console.log(stat);
             
             if (Number(stat[4]) > 1) {
                 _city = `(${stat[4]}) ${_city}`;
@@ -263,7 +263,7 @@ class App extends Component {
                     <GoogleMapReact
                         bootstrapURLKeys={{ key: this.state.googleMapAPI }}
                         options={{ styles: MAPSTYLES }}
-                        defaultCenter={_center}
+                        //defaultCenter={_center}
                         defaultZoom={this.state.zoom}
                         center={_center}
                         zoom={2}

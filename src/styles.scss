@@ -147,6 +147,17 @@ main {
                     left: $spacer/2;
                 }
             }
+            section:after {
+                content: "";
+                position: fixed;
+                pointer-events: none;
+                z-index: 1;
+                top: 45px;
+                left: 0;
+                height: 66px;
+                width: 100%;
+                background: linear-gradient($black__darkest, transparent);
+            }
         }
     }
     &.settings {
@@ -292,9 +303,9 @@ section {
         position: absolute;
         pointer-events: none;
         z-index: 1;
-        top: 44px;
+        top: 45px;
         left: 0;
-        height: 100%;
+        height: 100vh;
         width: 100vw;
         background: linear-gradient($black__darkest, rgba($black, 0.5));
     }
