@@ -95,10 +95,11 @@ main {
         @media screen and (max-width: 1280px) {
           main.live:not([class*="error"]) section:last-child:before {
             left: 24px; } }
-  main.settings {
-    min-height: 100vh;
-    background: url("/bg.jpg") no-repeat 50% 50%;
-    background-size: cover; }
+  @media screen and (min-width: 1280px) {
+    main.settings {
+      min-height: 100vh;
+      background: url("/bg.jpg") no-repeat 50% 50%;
+      background-size: cover; } }
 
 section {
   position: relative;
@@ -239,7 +240,8 @@ section {
 
 form {
   padding: 24px;
-  background: rgba(63, 59, 73, 0.85); }
+  background: rgba(63, 59, 73, 0.85);
+  margin-bottom: 24px; }
   form input {
     border: 1px solid #575265;
     background: #35323e;
