@@ -143,6 +143,9 @@ main {
                 width: 66%;
                 padding-top: $spacer/6;
                 letter-spacing: 0.4em;
+                @media screen and (max-width: 1280px) {
+                    left: $spacer/2;
+                }
             }
         }
     }

@@ -92,6 +92,9 @@ main {
         width: 66%;
         padding-top: 8px;
         letter-spacing: 0.4em; }
+        @media screen and (max-width: 1280px) {
+          main.live:not([class*="error"]) section:last-child:before {
+            left: 24px; } }
   main.settings {
     min-height: 100vh;
     background: url("/bg.jpg") no-repeat 50% 50%;
