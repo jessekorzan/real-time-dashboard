@@ -192,7 +192,6 @@ main {
     }
     &.settings {
         @media screen and (min-width: 900px) {
-         
             background: url("/bg.jpg") no-repeat 50% 50%;
             background-size: cover;
         }
@@ -393,6 +392,13 @@ form {
         grid-gap: 12px;
         justify-content: space-between;
         align-items: center;
+        @media screen and (max-width: 900px) {
+            display: block;
+            button {
+                margin-bottom: $spacer/2;
+                width: 100%;
+            }
+        }
     }
 }
 

@@ -296,6 +296,12 @@ form {
     grid-gap: 12px;
     justify-content: space-between;
     align-items: center; }
+    @media screen and (max-width: 900px) {
+      form .grid {
+        display: block; }
+        form .grid button {
+          margin-bottom: 24px;
+          width: 100%; } }
 
 @keyframes pulse {
   0% {
