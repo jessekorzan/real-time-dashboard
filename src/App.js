@@ -315,7 +315,7 @@ class App extends Component {
                 }
                 { !this.state.settings &&
                     <div>
-                        <main id="app">
+                        <main id="app" className="settings">
                             <section>
                                 <h1>Get a real-time dashboard from Google Analytics</h1>
                                 <p>Configure with your own values and watch your website or app usage in real-time.<br />

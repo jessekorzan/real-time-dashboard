@@ -54,6 +54,9 @@ body {
 h1 {
     font-size: 1.5vw;
     margin: 0 0 $spacer;
+    @media screen and (max-width: 1280px) {
+        font-size: 24px;
+    }
 }
 a {
     color: $blue;
@@ -143,6 +146,11 @@ main {
             }
         }
     }
+    &.settings {
+        min-height: 100vh;
+        background: url("/bg.jpg") no-repeat 50% 50%;
+        background-size: cover;
+    }
 }
 
 section {
@@ -153,6 +161,9 @@ section {
     padding: $spacer/2 $spacer;
     *:last-child {
         margin-bottom: 0;
+    }
+    @media screen and (max-width: 1280px) {
+        padding: $spacer/2;
     }
 }
 .status {
@@ -202,6 +213,10 @@ section {
         animation: fadeIn 260ms ease-in-out;
         //animation-fill-mode: forwards;
         transition: all 260ms ease-in-out;
+        @media screen and (max-width: 1280px) {
+            font-size: 18px !important;
+        }
+        
     }
     &:nth-last-child(4) {
         h1 {
@@ -306,7 +321,7 @@ section {
 }
 form {
     padding: $spacer/2;
-    background: $black__dark;
+    background: rgba($black__dark, 0.85);
     input {
         border: 1px solid $black;
         background: $black__darkest;

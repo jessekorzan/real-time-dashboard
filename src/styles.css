@@ -14,6 +14,9 @@ body {
 h1 {
   font-size: 1.5vw;
   margin: 0 0 48px; }
+  @media screen and (max-width: 1280px) {
+    h1 {
+      font-size: 24px; } }
 
 a {
   color: #31aae3;
@@ -89,6 +92,10 @@ main {
         width: 66%;
         padding-top: 8px;
         letter-spacing: 0.4em; }
+  main.settings {
+    min-height: 100vh;
+    background: url("/bg.jpg") no-repeat 50% 50%;
+    background-size: cover; }
 
 section {
   position: relative;
@@ -98,6 +105,9 @@ section {
   padding: 24px 48px; }
   section *:last-child {
     margin-bottom: 0; }
+  @media screen and (max-width: 1280px) {
+    section {
+      padding: 24px; } }
 
 .status {
   position: fixed;
@@ -141,6 +151,9 @@ section {
   font-weight: 700;
   animation: fadeIn 260ms ease-in-out;
   transition: all 260ms ease-in-out; }
+  @media screen and (max-width: 1280px) {
+    .stat h1 {
+      font-size: 18px !important; } }
 
 .stat:nth-last-child(4) h1 {
   font-size: 2vw;
@@ -223,7 +236,7 @@ section {
 
 form {
   padding: 24px;
-  background: #3f3b49; }
+  background: rgba(63, 59, 73, 0.85); }
   form input {
     border: 1px solid #575265;
     background: #35323e;
