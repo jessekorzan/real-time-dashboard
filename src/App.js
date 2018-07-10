@@ -128,6 +128,11 @@ class App extends Component {
                 _country = stat[0],
                 _str = `${_city}${_country}`;
             
+            
+            
+            if (Number(stat[4]) > 1) {
+                _city = `(${stat[4]}) ${_city}`;
+            }
             if (stat[2]) {
                 _plot.push([`${stat[2]}, ${stat[3]}, ${_city}`]);
                 if (index ===0) 
@@ -193,6 +198,7 @@ class App extends Component {
         this.poll();
         this.setState({
             userName : _user.name,
+            pause: false, // app should be polling now
             error : "Waiting for visitors..."
         })
     }
