@@ -141,8 +141,6 @@ class App extends Component {
         
         if (_total > 0) {
             _stats = this.uniqueArray(_stats.concat(_incoming));
-            // drop old ones
-            _stats.length = 10;
             // remove any previous error messages
             _error = null;
         }
@@ -319,12 +317,14 @@ class App extends Component {
                             <section>
                                 <h1>Get a real-time dashboard from Google Analytics</h1>
                                 <p>Configure with your own values and watch your website or app usage in real-time.<br />
-                                <i>Need Help? <a href="https://hackernoon.com/using-the-google-real-time-reporting-api-71ce3f6ceee4" target="_blank">Read this post</a> or <a href="https://twitter.com/jessekorzan" target="_blank">@jessekorzan</a></i></p>
+                                <i>Need Help? <a href="https://hackernoon.com/using-the-google-real-time-reporting-api-71ce3f6ceee4" target="_blank">Read this post</a> or ask <a href="https://twitter.com/jessekorzan" target="_blank">@jessekorzan</a></i></p>
                                 <Settings 
                                     handleSettingsUpdate={this.handleSettingsUpdate} 
                                     handleSettingsValue={this.handleSettingsValue} 
                                     { ...this.state } 
                                 />
+                                <p><small><i>These values are kept in your browsers local storage and not transmitted, recorded or stored anywhere else. Scouts honour.</i></small></p>
+                                <p><small><i>Made in Canada &mdash; 2018</i></small></p>
                             </section>
                         </main>
                     </div>

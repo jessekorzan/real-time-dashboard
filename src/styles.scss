@@ -151,9 +151,17 @@ main {
     }
     &.settings {
         @media screen and (min-width: 1280px) {
-            min-height: 100vh;
+         
             background: url("/bg.jpg") no-repeat 50% 50%;
             background-size: cover;
+        }
+        color: $tan-darker;
+        section {
+            display: block;
+            height: auto;
+            *:last-child {
+                margin-bottom: $spacer/2;
+            }
         }
     }
 }

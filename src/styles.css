@@ -95,11 +95,17 @@ main {
         @media screen and (max-width: 1280px) {
           main.live:not([class*="error"]) section:last-child:before {
             left: 24px; } }
-  @media screen and (min-width: 1280px) {
-    main.settings {
-      min-height: 100vh;
-      background: url("/bg.jpg") no-repeat 50% 50%;
-      background-size: cover; } }
+  main.settings {
+    color: #dfe2dd; }
+    @media screen and (min-width: 1280px) {
+      main.settings {
+        background: url("/bg.jpg") no-repeat 50% 50%;
+        background-size: cover; } }
+    main.settings section {
+      display: block;
+      height: auto; }
+      main.settings section *:last-child {
+        margin-bottom: 24px; }
 
 section {
   position: relative;
