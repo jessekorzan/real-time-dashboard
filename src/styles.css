@@ -33,6 +33,9 @@ p {
 a {
   color: #31aae3; }
 
+img {
+  max-width: 100%; }
+
 .ui--button, button {
   border: none;
   background: #44bc8f;
@@ -86,6 +89,17 @@ main {
   justify-content: flex-start;
   padding-top: 48px;
   overflow-y: scroll; }
+  main section {
+    position: relative;
+    z-index: 9999;
+    width: 100%;
+    max-width: 1024px;
+    padding: 24px 48px; }
+    main section *:last-child {
+      margin-bottom: 0; }
+    @media screen and (max-width: 1280px) {
+      main section {
+        padding: 24px; } }
   main.live {
     height: 58vh;
     align-items: flex-end;
@@ -119,27 +133,16 @@ main {
         background: linear-gradient(#35323e, transparent); }
   main.settings {
     color: #dfe2dd; }
-    @media screen and (min-width: 1280px) {
+    @media screen and (min-width: 900px) {
       main.settings {
         background: url("/bg.jpg") no-repeat 50% 50%;
         background-size: cover; } }
     main.settings section {
       display: block;
-      height: auto; }
+      height: auto;
+      max-width: 900px; }
       main.settings section *:last-child {
         margin-bottom: 24px; }
-
-section {
-  position: relative;
-  z-index: 9999;
-  width: 100%;
-  max-width: 1024px;
-  padding: 24px 48px; }
-  section *:last-child {
-    margin-bottom: 0; }
-  @media screen and (max-width: 1280px) {
-    section {
-      padding: 24px; } }
 
 .status {
   position: fixed;

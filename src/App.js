@@ -329,15 +329,16 @@ class App extends Component {
                     <div>
                         <main id="app" className="settings">
                             <section>
+                                
                                 <h1 style={{"margin" : "0 0 12px"}}>Real-time Dashboard &mdash; Visualize Your Users</h1>
                                 <h2>Quick  <a href="https://hackernoon.com/using-the-google-real-time-reporting-api-71ce3f6ceee4" target="_blank">configuration</a> with Google Analytics and Google Developer Console</h2>
+                                
                                 <Settings 
                                     handleSettingsUpdate={this.handleSettingsUpdate} 
                                     handleSettingsValue={this.handleSettingsValue} 
                                     { ...this.state } 
                                 />
-                                <p><small><i>These values are kept in your browsers local storage and not transmitted, recorded or stored anywhere else. Scouts honour.</i></small></p>
-                                <p><small><i>Made in Canada &mdash; 2018</i></small></p>
+                                <p><small><i>These values are kept in your browsers local storage and not transmitted, recorded or stored anywhere else. Scouts honour. Made in Canada &mdash; 2018</i></small></p>
                             </section>
                         </main>
                     </div>

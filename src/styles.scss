@@ -76,7 +76,9 @@ a {
     color: $blue;
     //text-decoration: none;
 }
-
+img {
+    max-width: 100%;
+}
 // ui
 .ui--button, button {
     border: none;
@@ -140,6 +142,19 @@ main {
     //align-items: center;
     padding-top: $spacer;
     overflow-y: scroll;
+    section {
+        position: relative;
+        z-index: 9999;
+        width: 100%;
+        max-width: $screen-md;
+        padding: $spacer/2 $spacer;
+        *:last-child {
+            margin-bottom: 0;
+        }
+        @media screen and (max-width: 1280px) {
+            padding: $spacer/2;
+        }
+    }
     &.live {
         height: 58vh;
         align-items: flex-end;
@@ -176,7 +191,7 @@ main {
         }
     }
     &.settings {
-        @media screen and (min-width: 1280px) {
+        @media screen and (min-width: 900px) {
          
             background: url("/bg.jpg") no-repeat 50% 50%;
             background-size: cover;
@@ -185,6 +200,7 @@ main {
         section {
             display: block;
             height: auto;
+            max-width: 900px;
             *:last-child {
                 margin-bottom: $spacer/2;
             }
@@ -192,19 +208,7 @@ main {
     }
 }
 
-section {
-    position: relative;
-    z-index: 9999;
-    width: 100%;
-    max-width: $screen-md;
-    padding: $spacer/2 $spacer;
-    *:last-child {
-        margin-bottom: 0;
-    }
-    @media screen and (max-width: 1280px) {
-        padding: $spacer/2;
-    }
-}
+
 .status {
     position: fixed;
     z-index: 999999;
