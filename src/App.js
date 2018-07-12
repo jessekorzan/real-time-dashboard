@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, PureComponent, Fragment } from 'react';
 import {GoogleAPI, GoogleLogin, GoogleLogout, CustomGoogleLogin, CustomGoogleLogout, googleGetBasicProfil, googleGetAuthResponse} from 'react-google-oauth'
 import GoogleMapReact from 'google-map-react';
 import MAPSTYLES from './map.js';
@@ -9,16 +9,21 @@ const Marker = ({ text }) =>
     <div className="marker"><span>{text}</span></div>;
 
 // svg polling timer
-const StatusSVG = ( { strokeDasharray }) =>             
-    <div className="status">
-        <div className="chart--donut">
-            <svg viewBox="0 0 40 40">
-                <circle className="chart--donut--segment" cx="20" cy="20" r="15.91549430918954"></circle>
-                <circle className="chart--donut--segment" cx="20" cy="20" r="15.91549430918954" strokeDasharray={ strokeDasharray }></circle>
-            </svg>
-        </div>
-    </div>
-
+class StatusSVG extends PureComponent {
+    render() {
+        let { strokeDasharray } = this.props;
+        return (
+            <div className="status">
+                <div className="chart--donut">
+                    <svg viewBox="0 0 40 40">
+                        <circle className="chart--donut--segment" cx="20" cy="20" r="15.91549430918954"></circle>
+                        <circle className="chart--donut--segment" cx="20" cy="20" r="15.91549430918954" strokeDasharray={ strokeDasharray }></circle>
+                    </svg>
+                </div>
+            </div>
+        )
+    }
+}
 // settings form
 const  Settings = ( { ...props, handleSettingsUpdate, handleSettingsValue } ) => 
     <form className="settings">
